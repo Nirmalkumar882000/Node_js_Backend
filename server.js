@@ -2,22 +2,25 @@ const express = require("express");
 const app = express();
 const db = require("./config/database");
 const port = 8000;
+const cors =require("cors")
 
 const usersrouter =require("./router/userRoute")
+
+
+const  corsOptions = {
+  origin: "http://localhost:5173"
+};
 
 // middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors(corsOptions))
 
 
 app.use("/api",usersrouter)
 
 
 app.get("/", (req, res) => res.send("Hello World!"));
-
-
-
-
 
 
 // Connect database in this code
